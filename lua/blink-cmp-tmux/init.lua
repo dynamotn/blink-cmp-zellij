@@ -1,12 +1,12 @@
 ---@class blink-cmp-tmux.Opts
----@field all_panes boolean
+---@field panes string
 ---@field capture_history boolean
 ---@field triggered_only boolean
 ---@field trigger_chars string[]
 
 ---@type blink-cmp-tmux.Opts
 local default_opts = {
-	all_panes = false,
+	panes = "window",
 	capture_history = false,
 	triggered_only = false,
 	trigger_chars = { "." },
@@ -73,8 +73,10 @@ function tmux:get_pane_ids()
 	local ids = {}
 	local cmd = { "tmux", "list-panes", "-F", "'#{pane_id}'" }
 
-	if self.opts.all_panes then
+	if self.opts.panes == "all" then
 		table.insert(cmd, "-a")
+	elseif self.opts.panes == "session" then
+		table.insert(cmd, "-s")
 	end
 	vim.system(cmd, {
 		stdout = function(_, data)

@@ -39,7 +39,11 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim)
           name = "tmux",
           -- default options
           opts = {
-            all_panes = false,
+            -- `panes` option supports these values:
+            -- * `window`  - completions from current tmux window panes only
+            -- * `session` - completions from current tmux session panes only
+            -- * `all`     - completions from all tmux panes
+            panes = "window",
             capture_history = false,
             -- only suggest completions from `tmux` if the `trigger_chars` are
             -- used
