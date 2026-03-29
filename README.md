@@ -62,6 +62,3 @@ have any suggestions, bug reports, or feature requests.
 
 - [mgalliou/blink-cmp-tmux](https://github.com/mgalliou/blink-cmp-tmux): the
 tmux source this was ported from
-
-[zellij](https//github.com/zellij-org/zellij)
-[blink.cmp](https://github.com/Saghen/blink.cmp)
