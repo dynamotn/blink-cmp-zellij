@@ -1,20 +1,18 @@
-# blink-cmp-tmux
+# blink-cmp-zellij
 
-Port of the [andersevenrud/cmp-tmux](https://github.com/andersevenrud/cmp-tmux)
-completion source for the [blink.cmp] [Neovim](https://github.com/neovim/neovim)
-plugin.
+A zellij completion source for the [blink.cmp] [Neovim](https://github.com/neovim/neovim)
+plugin. Provides completion suggestions based on the content of [zellij](https://github.com/zellij-org/zellij) panes.
 
 ## Features
 
-- Integrates with [tmux] to provide completion suggestions based on the content
-  of [tmux] panes.
+- Integrates with [zellij](https://github.com/zellij-org/zellij) to provide completion suggestions based on the
+  content of panes.
 - Supports capturing content from all panes or only the current pane.
-- Allows capturing the history of panes for more comprehensive suggestions.
 - Configurable trigger characters to activate completions.
 
 ## Requirements
 
-- [tmux]
+- [zellij](https://github.com/zellij-org/zellij) 0.44+
 - [blink.cmp]
 
 ## Installation & Configuration
@@ -25,28 +23,26 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim)
 {
   "saghen/blink.cmp",
   dependencies = {
-      "mgalliou/blink-cmp-tmux",
+      "dynamotn/blink-cmp-zellij",
   },
   opts = {
     sources = {
       default = {
         --- your other sources
-        "tmux",
+        "zellij",
       },
       providers = {
-        tmux = {
-          module = "blink-cmp-tmux",
-          name = "tmux",
+        zellij = {
+          module = "blink-cmp-zellij",
+          name = "zellij",
           -- default options
           opts = {
-            -- `panes` option supports these values:
-            -- * `window`  - completions from current tmux window panes only
-            -- * `session` - completions from current tmux session panes only
-            -- * `all`     - completions from all tmux panes
-            panes = "window",
-            capture_history = false,
-            -- only suggest completions from `tmux` if the `trigger_chars` are
-            -- used
+            -- when true, capture content from all session panes (uses
+            -- `zellij action list-panes` to enumerate panes);
+            -- when false, capture only the current focused pane
+            all_panes = false,
+            -- only suggest completions from `zellij` if the `trigger_chars`
+            -- are used
             triggered_only = false,
             trigger_chars = { "." }
           },
@@ -64,11 +60,8 @@ have any suggestions, bug reports, or feature requests.
 
 ## Credits
 
-- [andersevenrud](https://github.com/andersevenrud): for the original completion
-  source
-- [moyiz/blink-emoji.nvim](https://github.com/moyiz/blink-emoji.nvim) and
-  [MahanRahmati/blink-nerdfont.nvim](https://github.com/MahanRahmati/blink-nerdfont.nvim)
-  for some code inspiration
+- [mgalliou/blink-cmp-tmux](https://github.com/mgalliou/blink-cmp-tmux): the
+tmux source this was ported from
 
-[tmux]: https://github.com/tmux/tmux
-[blink.cmp]: https://github.com/Saghen/blink.cmp
+[zellij](https//github.com/zellij-org/zellij)
+[blink.cmp](https://github.com/Saghen/blink.cmp)
